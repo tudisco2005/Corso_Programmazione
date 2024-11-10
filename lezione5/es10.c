@@ -10,7 +10,6 @@ il prodotto, visualizzi i fattori e il prodotto e termini.
 
 #define N 3
 
-
 void enterMatrix(int a[][N]) {
     for(int y=0; y<N; y++){
         for(int x=0; x<N; x++){
@@ -47,18 +46,27 @@ int main() {
     printMatrix(b);
 
     printf("\n----multiply----\n");
-    int multiply[N][N];
+    long int multiply[N][N];
+    for(int y=0; y<N; y++){
+        for(int x=0; x<N; x++){
+            multiply[y][x] = 0;
+        }
+    }
 
     for(int y=0; y<N; y++){
         for(int x=0; x<N; x++){
-            printf("%d * %d = [%d]\t", a[x][y], b[x][y], a[x][y] * b[x][y]);
-            multiply[x][y] = a[x][y] * b[x][y];
+            for(int k=0;k<N;k++) {
+                multiply[y][x] += a[y][k]*b[k][x];
+            }
         }
-        printf("\n");
     }
 
     printf("\n----result----\n");
-    printMatrix(multiply);
-
+     for(int y=0; y<N; y++){
+        for(int x=0; x<N; x++){
+            printf("[%ld] ", multiply[x][y]);
+        }
+        printf("\n");
+    }
     return 0;
 }
