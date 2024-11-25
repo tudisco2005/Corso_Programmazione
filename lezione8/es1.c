@@ -95,7 +95,7 @@ int inserisciInTesta(Node **head, const int data_to_enter) {
     new_node->next = *head;
 
     *head = new_node;
-    return 0;
+    return (*head)->data;
 }
 
 int inserisciInCoda(Node **head, const int data_to_enter) {
@@ -112,7 +112,7 @@ int inserisciInCoda(Node **head, const int data_to_enter) {
     new_node->data = data_to_enter;
     new_node->next = NULL;
     curr->next = new_node;
-    return 0;
+    return curr->next->data;
 }
 
 int rimuoviInTesta(Node **head) {
@@ -163,15 +163,25 @@ int cancella(Node **head) {
     return 0;
 }
 
+int inizializzaLista(Node **head, const int data_to_enter) {
+    if((*head) != NULL) {
+        printf("The head is pointing to something, is not NULL\n");
+        return 0;
+    } 
+    (*head) = (Node*) malloc(sizeof(Node));
+    (*head)->data = data_to_enter;
+    (*head)->next = NULL;
+    return 0;
+}
+
 int main() {
-    Node *head = (Node*) malloc(sizeof(Node));
-    head->data = 0;
-    head->next = NULL;
+    Node *head = NULL;
+    inizializzaLista(&head, 0);
 
     printflist(head);
-    inserisciInCoda(&head, 10);
+    printf("Entered: %d\n", inserisciInCoda(&head, 10));
     printflist(head);
-    inserisciInTesta(&head, 99);
+    printf("Entered: %d\n", inserisciInTesta(&head, 99));
     printflist(head);
     rimuoviInTesta(&head);
     rimuoviInTesta(&head);
