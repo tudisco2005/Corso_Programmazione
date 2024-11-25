@@ -98,8 +98,8 @@ int inserisciInTesta(Node **head, const int data_to_enter) {
     return 0;
 }
 
-int inserisciInCoda(Node *head, const int data_to_enter) {
-    Node *curr = head;
+int inserisciInCoda(Node **head, const int data_to_enter) {
+    Node *curr = *head;
     while(curr->next) {
         curr = curr->next;
     }
@@ -166,9 +166,10 @@ int cancella(Node **head) {
 int main() {
     Node *head = (Node*) malloc(sizeof(Node));
     head->data = 0;
+    head->next = NULL;
 
     printflist(head);
-    inserisciInCoda(head, 10);
+    inserisciInCoda(&head, 10);
     printflist(head);
     inserisciInTesta(&head, 99);
     printflist(head);
@@ -183,13 +184,13 @@ int main() {
     rimuoviInCoda(&head);
     printflist(head);
     inserisciInTesta(&head, -99);
-    inserisciInCoda(head, -98);
+    inserisciInCoda(&head, -98);
     printflist(head);
     rimuoviInCoda(&head);
     printflist(head);
 
     for(int i=1; i<10; i++) {
-        inserisciInCoda(head, i);
+        inserisciInCoda(&head, i);
         inserisciInTesta(&head, i);
     }
     printflist(head);
